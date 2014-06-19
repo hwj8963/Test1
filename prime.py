@@ -23,12 +23,28 @@ class Prime :
                 self.prime_max = 1
                 self.prime_list = []
                 self.fac_dic = {}
-
+        def prime_nth(self,n) :
+                while len(self.prime_list) < n :
+                        now = self.prime_max+1
+                        isPrime = True
+                        for k in self.prime_list :
+                                if k > math.sqrt(now) :
+                                        break
+                                if now%k == 0 :
+                                        isPrime = False
+                                        break
+                        if isPrime :
+                                self.prime_list += [now]
+                        self.prime_max += 1
+                return self.prime_list[n-1]       
+                
         def primes(self,n) :
                 if(self.prime_max < n) :
                         for i in range(self.prime_max+1,n) :
                                 isPrime = True
                                 for k in self.prime_list :
+                                        if k > math.sqrt(i) :
+                                                break
                                         if i%k == 0 :
                                                 isPrime = False
                                                 break
@@ -62,6 +78,8 @@ class Prime :
                         for i in range(self.prime_max+1,int(math.sqrt(n))+1) :
                                 isPrime = True
                                 for k in self.prime_list :
+                                        if k > math.sqrt(i) :
+                                                break
                                         if i%k == 0 :
                                                 isPrime = False
                                                 break

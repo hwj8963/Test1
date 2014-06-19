@@ -1,5 +1,6 @@
 import math
-
+import itertools
+from functools import reduce
 
 class Prime2 :
         def primes(self,n) :
@@ -59,7 +60,21 @@ class Prime :
                                         break
                                 num += 1
                         return self.prime_list[0:num]
-                
+        def factorization_dic(self,n) :
+                fac = self.factorization(n)
+                fac_dic = {}
+                for p in fac :
+                        if p in fac_dic :
+                                fac_dic[p] += 1
+                        else :
+                                fac_dic[p] = 1
+                return fac_dic
+        def divisor_num(self,n) :
+                fac_dic = self.factorization_dic(n)
+                num = 1
+                for p in fac_dic :
+                        num *= fac_dic[p]+1
+                return num                
         def factorization(self,n) :
                 if n == 1 :
                         return []

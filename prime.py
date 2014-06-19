@@ -1,5 +1,21 @@
 import math
 
+
+class Prime2 :
+        def primes(self,n) :
+                list = range(2,n+1)
+                i = 0
+                while list[i] < math.sqrt(n) :
+                        print(list[i])
+                        list = [m for m in list if m<=list[i] or m%list[i] != 0]
+                        i += 1
+                return list
+        
+        
+
+
+
+
         
 class Prime : 
 

@@ -1,16 +1,17 @@
 import math
 import copy
-
+import digit
 class BigInteger :
     dpn = 10
+    dn = int(math.pow(10,dpn))
     def __init__(self,num) :
         if isinstance(num,BigInteger) :
             self.num_list = copy.copy(num.num_list)
         else :
             self.num_list = []
             while num != 0 :
-                self.num_list += [num % int(math.pow(10,self.dpn))]
-                num = int(num/math.pow(10,self.dpn))
+                self.num_list += [num % self.dn]
+                num = int(num/self.dn)
     def __str__(self) :
         s = ""
         first = True
@@ -54,19 +55,48 @@ class BigInteger :
         if isinstance(other,BigInteger) :
             if self > other :
                 big = BigInteger(self)
-                small = 
+                small = BigInteger(other)
             else :
-                add = BigInteger(other)
+                 big = BigInteger(other)
+                 small = BigInteger(other)
 
-            
-            return BigInteger(5525252522);
-        else
-            
+            for i in range(len(small.num_list)) :
+                big.num_list[i] += small.num_list[i]
+            big.normalize()
+            return big
+        else :
+            ret = BigInteger(self)
+            ret.num_list[0] += other
+            ret.normalize()
+            return ret
+    def __mul__(self,other) :
+        if isinstance(other,int) :
+            new = BigInteger(self)
+            for i in range(len(new.num_list)) :
+                new.num_list[i] *= other
+            new.normalize()
+            return new
+                
+    def normalize(self) :
+        carry = 0
+        for i in range(len(self.num_list)) :
+            n = self.num_list[i]
+            n += carry
+            carry = int(n/self.dn)
+            n = n%self.dn
+            self.num_list[i] = n
+        while carry > 0 :
+            self.num_list += [carry%self.dn]
+            carry = int(carry/self.dn)
+    def digitsum(self) :
+        sum = 0
+        for n in self.num_list :
+            sum += digit.digitsum(n)
+        return sum
+        
 A = BigInteger(2763475829034975)
 B = BigInteger(1624987593949234382)
-C = BigInteger(2763475829034974)
-print(A>=A)
-print(A>=B)
-print(A>=C)
+C = BigInteger(2763475829034975)
+print(A.digitsum())
 
 

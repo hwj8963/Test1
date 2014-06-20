@@ -10,4 +10,3 @@ def digitsum(n) :
         n = int(n/10)
     return sum
 
-print(digitsum(19782037120))

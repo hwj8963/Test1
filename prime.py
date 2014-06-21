@@ -123,7 +123,5 @@ class Prime :
                         return [n]     
 
 
-P = Prime()
-P.divisors(200)
         
         

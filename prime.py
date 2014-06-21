@@ -74,7 +74,19 @@ class Prime :
                 num = 1
                 for p in fac_dic :
                         num *= fac_dic[p]+1
-                return num                
+                return num
+        def divisors(self,n) :
+                dic = self.factorization_dic(n)
+                l = [1]
+                for p in dic.keys() :
+                        pi = 1
+                        lnew = []
+                        for i in range(dic[p]+1) :
+                                lnew += [item*pi for item in l]
+                                pi *= p
+                        l = lnew
+                return l                   
+                        
         def factorization(self,n) :
                 if n == 1 :
                         return []
@@ -108,10 +120,10 @@ class Prime :
                                                 return fac
                                 
                         self.fac_dic[n] = [n]
-                        return [n]           
+                        return [n]     
 
 
-
-                
+P = Prime()
+P.divisors(200)
         
         

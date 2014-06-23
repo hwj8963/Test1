@@ -10,3 +10,9 @@ def digitsum(n) :
         n = int(n/10)
     return sum
 
+def digits(n) :
+    ret = []
+    while n != 0 :
+        ret += [n%10]
+        n = int(n/10)
+    return ret
